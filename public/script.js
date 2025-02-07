@@ -28,15 +28,16 @@ removeButton.addEventListener('click', async () => {
     const formData = new FormData();
     formData.append('image', file);
 
-    // ✅ Show animation inside the preview box
+    // ✅ Show animation **inside** the preview box
     processingAnimation.style.display = 'flex';
-    imagePreview.innerHTML = ''; // Clear preview while processing
-    imagePreview.appendChild(processingAnimation);
 
-    // Simulate a delay of 3-4 seconds before making the request
+    // Hide any previous image while processing
+    imagePreview.querySelector('img')?.remove();
+
+    // Simulate a delay of 3 seconds before making the request
     setTimeout(async () => {
         try {
-            const response = await fetch('/remove-background', {
+            const response = await fetch('https://nobackground-kms6.onrender.com/remove-background', { // ✅ Update this
                 method: 'POST',
                 body: formData
             });
